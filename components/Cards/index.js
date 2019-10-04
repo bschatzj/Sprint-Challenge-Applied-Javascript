@@ -1,7 +1,7 @@
 // STEP 3: Create Article cards.
 // -----------------------
 // Send an HTTP GET request to the following address: https://lambda-times-backend.herokuapp.com/articles
-// Stduy the response data you get back, closely.
+// Study the response data you get back, closely.
 // You will be creating a component for each 'article' in the list.
 // This won't be as easy as just iterating over an array though.
 // Create a function that will programmatically create the following DOM component:
@@ -21,6 +21,23 @@
 
 
 
+const cards = document.querySelector(".cards-container");
+
+let articleArray = [];
+axios.get('https://lambda-times-backend.herokuapp.com/articles')
+.then(response => {
+for (item in response.data.articles) {
+    articleArray.push(item);
+    }
+    articleArray.forEach(articleNumber => {
+        response.data.articles[articleNumber].forEach( item => {
+            cards.appendChild(newCard(item));
+        })
+    })
+})
+.catch(error => {
+    console.log(error);
+})
 
 
 
